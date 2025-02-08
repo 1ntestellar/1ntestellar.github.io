@@ -38,7 +38,6 @@
     
 
   </style>
-  <script type="module" crossorigin src="/assets/index-oUX_pslS.js"></script>
 </head>
 <body class="gradient-background">
   <div class="flex items-center justify-center h-screen">
@@ -61,7 +60,51 @@
         </center>
     </div>
   </div>
+
+  <script type="module">
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    const imageDisplay = document.getElementById('imageDisplay');
+    const valentineQuestion = document.getElementById('valentineQuestion');
+    const responseButtons = document.getElementById('responseButtons');
   
+    let noClickCount = 0;
+    let buttonHeight = 48; // Starting height in pixels
+    let buttonWidth = 80;
+    let fontSize = 20; // Starting font size in pixels
+    const imagePaths = [
+      "https://files.catbox.moe/qg8htl.jpg",
+      "https://files.catbox.moe/gs4t86.jpg",
+      "https://files.catbox.moe/4so6b6.jpg",
+      "https://files.catbox.moe/e8z145.jpg",
+      "https://files.catbox.moe/za4os0.jpg",
+      "https://files.catbox.moe/vbtgrt.jpg",
+    ];
+  
+    noButton.addEventListener('click', function() {
+      if (noClickCount < 5) {
+        noClickCount++;
+        imageDisplay.src = imagePaths[noClickCount];
+        buttonHeight += 35; // Increase height by 5px on each click
+        buttonWidth += 35;
+        fontSize += 25; // Increase font size by 1px on each click
+        yesButton.style.height = `${buttonHeight}px`; // Update button height
+        yesButton.style.width = `${buttonWidth}px`;
+        yesButton.style.fontSize = `${fontSize}px`; // Update font size
+        if (noClickCount < 6) {
+          noButton.textContent = ["no", "really?", "REALLY?", "don't do this to me :(", "you're breaking my heart...", "just click yes. there's no escaping."][noClickCount];
+        }
+      }
+    });
+  
+    yesButton.addEventListener('click', () => {
+      imageDisplay.src = 'https://files.catbox.moe/05f20a.jpg'; // Change to image7.gif
+      valentineQuestion.textContent = "Yayyy!! te amo!"; 
+      responseButtons.style.display = 'none'; 
+      confetti(); // Trigger confetti animation
+    });
+  </script>  
 
 
 <!-- a tidied up version of this code from http://jsfiddle.net/aKr8D/21/ embed must be hidden head -->
